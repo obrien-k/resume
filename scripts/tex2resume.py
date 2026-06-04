@@ -15,7 +15,11 @@ projects), not the JSON-Resume standard. Parses the custom macros:
 plus the heading block for contact fields.
 
 Usage:
-    python3 scripts/tex2resume.py resume.tex --json out/resume.json --vcf out/resume.vcf
+    python3 scripts/tex2resume.py resume.tex \\
+        --json out/resume.json --vcf out/resume.vcf [--yaml out/resume.yml]
+
+--yaml additionally emits the rendered page's data (_data/resume.yml), in the
+JSON-Resume shape Jekyll consumes, so the page is LaTeX-derived too.
 """
 import argparse
 import json
@@ -152,6 +156,53 @@ def parse_projects(s):
     return out
 
 
+def yq(s):
+    """Double-quoted YAML scalar, matching the hand-authored _data/resume.yml style."""
+    if s is None:
+        return '""'
+    return '"' + s.replace("\\", "\\\\").replace('"', '\\"') + '"'
+
+
+def to_yaml(contact, skills, experience, projects):
+    """Emit the page's JSON-Resume-shaped _data/resume.yml from the parsed data."""
+    L = ["basics:",
+         f"  name: {yq(contact['name'])}",
+         f"  label: {yq(contact['title'])}",
+         f"  email: {yq(contact['email'])}",
+         "  location:",
+         f"    region: {yq(contact['location'])}",
+         "  profiles:",
+         '    - network: "LinkedIn"',
+         f"      url: {yq(contact['linkedin'])}",
+         '    - network: "GitHub"',
+         f"      url: {yq(contact['github'])}",
+         "work:"]
+    for emp in experience:
+        L += [f"  - company: {yq(emp['company'])}",
+              f"    website: {yq(emp['companyUrl'])}",
+              f"    startDate: {yq(emp['startDate'])}",
+              f"    endDate: {yq(emp['endDate'])}",
+              "    positions:"]
+        for role in emp["roles"]:
+            L += [f"      - position: {yq(role['title'])}",
+                  f"        startDate: {yq(role['startDate'])}",
+                  f"        endDate: {yq(role['endDate'])}",
+                  "        highlights:"]
+            for acc in role["accomplishments"]:
+                L.append(f"          - {yq(acc['title'] + ': ' + acc['description'])}")
+    L.append("skills:")
+    for sk in skills:
+        L += [f"  - name: {yq(sk['category'])}", "    keywords:"]
+        L += [f"      - {yq(it)}" for it in sk["items"]]
+    L.append("projects:")
+    for p in projects:
+        L += [f"  - name: {yq(p['title'])}",
+              f"    url: {yq(p['url'])}",
+              f"    description: {yq(p['description'])}",
+              f"    date: {yq(p['year'])}"]
+    return "\n".join(L) + "\n"
+
+
 def build_vcard(c):
     lines = ["BEGIN:VCARD", "VERSION:3.0", f"FN:{c['name']}", f"TITLE:{c['title']}",
              f"EMAIL:{c['email']}"]
@@ -170,6 +221,7 @@ def main():
     ap.add_argument("tex")
     ap.add_argument("--json", required=True)
     ap.add_argument("--vcf", required=True)
+    ap.add_argument("--yaml", help="also emit _data/resume.yml (the rendered page's data)")
     args = ap.parse_args()
 
     tex = open(args.tex, encoding="utf-8").read()
@@ -190,7 +242,11 @@ def main():
         json.dump(resume, f, indent=2, ensure_ascii=False)  # no trailing newline (matches site files)
     with open(args.vcf, "w", encoding="utf-8", newline="") as f:
         f.write(build_vcard(contact))
-    print(f"wrote {args.json} ({len(resume['experience'])} employers) and {args.vcf}", file=sys.stderr)
+    if args.yaml:
+        with open(args.yaml, "w", encoding="utf-8") as f:
+            f.write(to_yaml(contact, resume["skills"], resume["experience"], resume["projects"]))
+    print(f"wrote {args.json} ({len(resume['experience'])} employers), {args.vcf}"
+          + (f", {args.yaml}" if args.yaml else ""), file=sys.stderr)
 
 
 if __name__ == "__main__":

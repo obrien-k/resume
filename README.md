@@ -6,13 +6,15 @@ If you're on a mac, `brew install --cask mactex && pdflatex resume.tex`
 
 ## Single source of truth
 
-`resume.tex` is the origin. The website's downloadable JSON + vCard are
-**generated** from it so they can't silently drift:
+`resume.tex` is the origin. The website's downloadable JSON + vCard **and** the
+rendered page's data (`_data/resume.yml`) are all **generated** from it so they
+can't silently drift:
 
 ```sh
 python3 scripts/tex2resume.py resume.tex \
   --json ../obrien-k.github.io/assets/resume.json \
-  --vcf  ../obrien-k.github.io/assets/resume.vcf
+  --vcf  ../obrien-k.github.io/assets/resume.vcf \
+  --yaml ../obrien-k.github.io/_data/resume.yml
 ```
 
 After editing `resume.tex`: rebuild the PDF (`pdflatex resume.tex`, or push a
