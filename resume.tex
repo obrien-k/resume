@@ -66,6 +66,14 @@
     \end{tabular*}\vspace{-4pt}
 }
 
+\newcommand{\education}[4]{
+  \vspace{0pt}\item[]
+    \begin{tabular*}{1\textwidth}{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-4pt}
+}
+
 \newcommand{\jobLineItem}[2]{
   \vspace{0pt}\item[]
     \begin{tabular*}{0.98\textwidth}{l@{\extracolsep{\fill}}r}
@@ -84,6 +92,7 @@
 \renewcommand{\labelitemii}{$\circ$}
 
 \newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*]}
+\newcommand{\educationStart}{\begin{itemize}[leftmargin=0pt]}
 \newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
 \newcommand{\resumeItemListStart}{\begin{itemize}}
 \newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
@@ -97,14 +106,15 @@
 \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
   \textbf{\texttt{\LARGE Kyle O'Brien (Kai)}}\\
   \href{mailto:obrienk@webbhost.net}{\faEnvelope \texttt{ obrienk@webbhost.net}} \quad \href{https://www.linkedin.com/in/0kyle/}{\faLinkedin} \quad \href{https://github.com/obrien-k}{\faGithub} \quad \href{https://kyleobrien.me}{\faGlobe}\\
-  Full Stack Web Developer & Texas or Remote\\
+  Full Stack Engineer & Texas or Remote\\
 \end{tabular*}
 
 %--------PROGRAMMING SKILLS------------
 \section{Skills}
 	\resumeSubHeadingListStart
-	\resumeSubItem{Specialties}{Technical Writing, TypeScript, React, Vue.js, Node.js, GraphQL}
-  \resumeSubItem{More Tools and Languages}{DNS, Google Cloud, MongoDB, Customer Success}
+	\resumeSubItem{Writing and Docs}{Technical Writing, Markdown, OpenAPI, Git/PR Workflows}
+  \resumeSubItem{Languages}{TypeScript, Python, JavaScript, Node.js, GraphQL, React, Vue.js}
+  \resumeSubItem{Tools and Platforms}{Claude Code, CI/CD, Google Cloud, MongoDB, MSSQL Server, ZenDesk, Algolia}
   \vspace{5px}
 \resumeSubHeadingListEnd
 
@@ -126,19 +136,22 @@
     \jobLineItem
       {Senior Development Support Engineer (Full-time, Remote)}{}
       \resumeItemListStart
-        \resumeItem{\href{https://support.apollographql.com/}{Launched Help Center}}{Composed written content for Apollo’s Help Center resulting in over 100 public articles. Developed custom Algolia integration for ZenDesk Guide to align search results with Apollo.}
+        \resumeItem{\href{https://support.apollographql.com/}{Documentation Architecture}}{Built Apollo’s Help Center support documentation from zero, resulting in over 100 public articles authored in Markdown via Git PR workflows. Developed custom Algolia integration for ZenDesk Guide to align search results with Apollo and reduce time-to-resolution. Deployed Google Cloud Serverless Function to interface publicly with secured API secrets.}
         \resumeItem{\href{https://stackoverflow.com/users/9281567/kyle-obrien}{Open Source Contributions}}{Addressed Open Source and enterprise inquiries regarding the Apollo platform and Federated GraphQL, resulting in improved customer satisfaction and reduced support response times. Contributed code, documentation, and infrastructure to internal and external Apollo projects.}
+        \resumeItem{SDK Validation \& Technical Authoring}{Authored and validated working TypeScript and JavaScript code samples against Apollo’s released SDKs across open source and enterprise repositories. Contributed documentation, code fixes, and infrastructure improvements to internal and external Apollo projects.}
+        \resumeItem{Team Infrastructure \& Onboarding}{Developed team infrastructure documentation, processes, and software integrations to improve team efficiency and onboarding. Created User Advocacy team Code of Conduct, onboarding process, and Identity Provider workflow involving SAML configuration and enterprise SSO integration with Ping Identity.}
       \resumeItemListEnd
   \resumeSubHeadingListEnd
 
   \employerTitle
-    {https://app.pharoscrm.com}{Pharos}{March 2021 - June 2022}
+    {https://www.andmore.com/}{ANDMORE}{March 2021 - June 2022}
   \resumeSubHeadingListStart
     \jobLineItem
       {Site Reliability Engineer (Full-time, Remote)}{}
       \resumeItemListStart
-        \resumeItem{Training Specialist}{Subject Matter Expert for Pharos B2B platform and integrations. Resolved on-call escalations for 18 agency suppliers as solo SRE on the Pharos platform. Onboarded enterprise merchants and developers to Pharos platform. Curated training documentation for L3 and related informational resources.}
-        \resumeItem{Customer Success Engineer}{Bridged communication between executive leadership, engineering, and customer success teams. Architected solutions for implementation using Pharos APIs. Managed product lifecycle working with stakeholders to develop React applications. Collaborated with sister company RepZio to deploy Node.js services for timekeeping and employee management.}
+        \resumeItem{Training Specialist}{Subject Matter Expert for subsidiary Pharos B2B platform and integrations. Resolved on-call escalations for 18 agency suppliers as solo SRE on the Pharos platform. Onboarded enterprise merchants and developers to Pharos platform. Curated training documentation for L3 and related informational resources.}
+        \resumeItem{Customer Success Engineer}{Bridged communication between ANDMORE executive leadership, engineering, and customer success teams. Architected solutions for implementation using Pharos and sister company RepZio APIs. Managed product lifecycle working with stakeholders to develop React applications. Collaborated with RepZio to deploy Node.js services for timekeeping and employee management.}
+        \resumeItem{Data Investigation}{Queried and modified production data using MSSQL Server and MongoDB Compass, including stored procedure modifications and aggregation pipelines for data analysis and issue investigation.}
       \resumeItemListEnd
   \resumeSubHeadingListEnd
 
@@ -148,7 +161,7 @@
     \jobLineItem
         {Developer Community Moderator (Full-time Austin, TX + Remote)}{August 2019 - October 2020}
     \resumeItemListStart
-        \resumeItem{\href{https://bigcommerce.github.io/dev-library/}{Developer Resources}}{Published written-material with code examples for developer-focused spaces in Node.js, React, and Python. Assisted Developer Experience team with introducing Developer Library and Contribution programs, and a Developer Community Code of Conduct.}
+        \resumeItem{\href{https://bigcommerce.github.io/dev-library/}{Cookbooks \& Tutorials}}{Published written-material with code examples for developer-focused spaces in Node.js, React, and Python. Assisted Developer Experience team with introducing Developer Library and Contribution programs, and a Developer Community Code of Conduct.}
         \resumeItem{\href{https://medium.com/bigcommerce-developer-blog/introduction-to-vue-js-bigcommerce-b4388a2da4d2}{VueConf US 2020}}{Attended VueConf 2020 with BigCommerce’s Developer Experience team, sharing insights of BigCommerce API capabilities for headless use-cases. Demoed BigCommerce control panel, serverless front-ends, co-wrote Vue.js discovery article and code examples for Developer Blog.}
     \resumeItemListEnd
     \jobLineItem
@@ -157,15 +170,17 @@
         \resumeItem{Process Improvement}
         {Trained peers to effectively submit technical escalations using ELK-stack queries, trained new products, and created a tool to improve BigCommerce CLI on-boarding using Bootstrap and Node.js.}
       \resumeItemListEnd
+    \newpage
     \jobLineItem
 		    {Technical Support Representative (Full-time, Austin, TX)}{June 2017 - July 2018}
         \resumeItemListStart
         \resumeItem{\href{https://github.com/obrien-k/code-noobs-slackbot}{Code Noobs}}{Founded club to teach peers JavaScript, Node.js, and React. Met every other Saturday with visits from Engineering department. Slack group with over 50 members.}
-        \resumeItem{HTML Princess}{Inspected elements of web pages and research methods of changing behavior in CSS and HTML using BigCommerce Stencil and Blueprint frameworks. Educated merchants on best practices for store design, SEO, and utilizing scripts.}
+        \resumeItem{DNS \& Email Authentication}{Served as primary T1 contact for DNS issues and the common T2 escalation path --- record management (A, CNAME, MX, TXT), propagation troubleshooting, and SPF/DKIM/DMARC. These areas were informed by personal experience running Google Workspace and self-hosted DNS servers.}
+        \resumeItem{Control Panel \& Store Reliability}{Trained new hires on fundamentals and handled advanced merchant escalations via BigCommerce’s custom control panel, which surfaced DNS, SSL certificate management, and site security settings directly to merchants.}
+        \resumeItem{Console Ninja}{Inspected elements of web pages and researched methods for changing behavior in CSS and HTML using BigCommerce Stencil and Blueprint frameworks. Educated merchants on best practices for DNS, SSL, SEO, and utilizing scripts.}
       \resumeItemListEnd
     \resumeSubHeadingListEnd
 
-  \newpage
   \employerTitle
     {https://www.opentable.com}{OpenTable}{October 2016 - May 2017}
   \resumeSubHeadingListStart
@@ -199,8 +214,6 @@
         \resumeItem{Awards}{Received the ``Pride Adventure Winning'' (PAW) award during training for epitomizing company goals.}
       \resumeItemListEnd
   \resumeSubHeadingListEnd
-
-
 
 %-----------Awards-----------------
 % \section{Honors and Awards}
